@@ -78,44 +78,54 @@ WatchFace({
     hmUI.createWidget(hmUI.widget.IMG, { x: 0, y: 0, src: 'bg.png', show_level: NORMAL })
     hmUI.createWidget(hmUI.widget.IMG, { x: 0, y: 0, src: 'aod/bg.png', show_level: AOD })
 
-    // Rings. On the watch ARC_PROGRESS angles start at 12 o'clock and grow clockwise.
-    // We always draw at level 100 and move the arc's ends, so direction is fully under our control.
-    const ring = (r, color) =>
+    // Rings: full-circle ARC_PROGRESS widgets (0 = 12 o'clock, clockwise) whose angles never
+    // change; only the fill level is updated via prop.LEVEL. Updating with a partial prop.MORE
+    // made the rings vanish on the watch.
+    const ring = (r, color, width = r.width) =>
       hmUI.createWidget(hmUI.widget.ARC_PROGRESS, {
         center_x: L.C,
         center_y: L.C,
         radius: r.radius,
         start_angle: 0,
-        end_angle: 0,
-        line_width: r.width,
+        end_angle: 360,
+        line_width: width,
         color,
-        level: 100,
+        level: 0,
         show_level: NORMAL,
       })
-    const setArc = (w, start, end) =>
-      w.setProperty(hmUI.prop.MORE, { start_angle: start, end_angle: end, level: end > start ? 100 : 0 })
     const pct = (v) => Math.max(0, Math.min(100, v || 0))
 
-    // battery: outer ring, full circle at 100%, drains back counter-clockwise toward 12
+    // battery: outer ring, full at 100%, drains back counter-clockwise toward 12
     const batteryArc = ring(L.battery, BATTERY_COLOR)
     const battery = hmSensor.createSensor(hmSensor.id.BATTERY)
-    const updateBattery = () => setArc(batteryArc, 0, 3.6 * pct(battery.current))
-    updateBattery()
-    battery.addEventListener(hmSensor.event.CHANGE, updateBattery)
+    const updateBattery = () => batteryArc.setProperty(hmUI.prop.LEVEL, pct(battery.current))
 
-    // steps: inner ring, clockwise from 12; each hour number = 1000 steps (full circle = 12000)
-    const stepArc = ring(L.stepRing, STEPS_COLOR)
+    // steps: inner ring, clockwise from 12; each hour number = 1000 steps.
+    // Lap 1 (0-12000) fills a thin line, lap 2 (12000-24000) a fat band drawn over it.
+    const thinArc = ring(L.stepRing, STEPS_COLOR, L.stepRing.thin)
+    const fatArc = ring(L.stepRing, STEPS_COLOR, L.stepRing.fat)
     const step = hmSensor.createSensor(hmSensor.id.STEP)
-    const updateSteps = () =>
-      setArc(stepArc, 0, Math.min(360, ((step.current || 0) / L.stepRing.stepsPerHour) * 30))
-    updateSteps()
-    step.addEventListener(hmSensor.event.CHANGE, updateSteps)
+    const lap = 12 * L.stepRing.stepsPerHour
+    const updateSteps = () => {
+      const s = step.current || 0
+      thinArc.setProperty(hmUI.prop.LEVEL, pct((s / lap) * 100))
+      fatArc.setProperty(hmUI.prop.LEVEL, pct(((s - lap) / lap) * 100))
+    }
 
-    // re-read sensors whenever the face comes back on screen
+    updateBattery()
+    updateSteps()
+
+    // listen only while the face is on screen; re-read everything when it comes back
     hmUI.createWidget(hmUI.widget.WIDGET_DELEGATE, {
       resume_call: () => {
+        battery.addEventListener(hmSensor.event.CHANGE, updateBattery)
+        step.addEventListener(hmSensor.event.CHANGE, updateSteps)
         updateBattery()
         updateSteps()
+      },
+      pause_call: () => {
+        battery.removeEventListener(hmSensor.event.CHANGE, updateBattery)
+        step.removeEventListener(hmSensor.event.CHANGE, updateSteps)
       },
     })
 

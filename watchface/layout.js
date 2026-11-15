@@ -27,7 +27,9 @@ module.exports = {
   numerals: { radius: 203, size: 52 }, // overlay image drawn above the rings
   // Rings. ARC_PROGRESS on the watch measures angles from 12 o'clock, clockwise.
   battery: { radius: 228, width: 3 }, // outer ring: full at 100%, drains back toward 12
-  stepRing: { radius: 214, width: 6, stepsPerHour: 1000 }, // inner ring: 1000 steps per hour number
+  // inner ring: 1000 steps per hour number, two laps (24000 steps):
+  // lap 1 (0-12k) fills a thin line, lap 2 (12k-24k) fills a fat band on top of it
+  stepRing: { radius: 214, thin: 3, fat: 9, width: 9, stepsPerHour: 1000, laps: 2 },
   date: { y: top.y - Math.round(dateFont.h / 2), weekW, weekX, dayX: weekX + weekW + dateGap },
   weather: { ...block(left), iconSize: 52 },
   heart: { ...block(right), iconSize: 34 },

@@ -253,11 +253,15 @@ async function renderPreview() {
     const [x1, y1] = polar(r, a), [x2, y2] = polar(r, b)
     return `<path d="M${x1} ${y1} A${r} ${r} 0 ${b - a > 180 ? 1 : 0} 1 ${x2} ${y2}" fill="none" stroke="${color}" stroke-width="${width}"/>`
   }
-  // sample data: 72% battery, 3476 steps
-  const batt = 72, steps = 3476
+  // sample data: 72% battery, 15400 steps (thin lap full, fat lap at 3.4)
+  const batt = 72, steps = 15400
+  const lap = 12 * L.stepRing.stepsPerHour
+  const deg = (v) => Math.min(359.9, Math.max(0, (v / lap) * 360))
+  const R = L.stepRing
   const arcs = Buffer.from(svg(W, W,
     arcPath(L.battery.radius, 0, 3.6 * batt, COL.battery, L.battery.width) +
-    arcPath(L.stepRing.radius, 0, Math.min(359.9, (steps / L.stepRing.stepsPerHour) * 30), COL.steps, L.stepRing.width)))
+    arcPath(R.radius, 0, deg(steps), COL.steps, R.thin) +
+    (steps > lap ? arcPath(R.radius, 0, deg(steps - lap), COL.steps, R.fat) : '')))
   const ws = L.weather.iconSize
   const layers = [
     { input: arcs, left: 0, top: 0 },
