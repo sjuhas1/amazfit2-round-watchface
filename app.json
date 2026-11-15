@@ -1,0 +1,90 @@
+{
+  "configVersion": "v2",
+  "app": {
+    "appId": 1436230,
+    "appName": "Yellow Analog",
+    "appType": "watchface",
+    "version": {
+      "code": 1,
+      "name": "1.0.0"
+    },
+    "icon": "icon.png",
+    "vender": "sjuhas1",
+    "description": "Analog face: yellow hands, red seconds, blue battery arc, date, steps, heart rate, weather"
+  },
+  "permissions": [],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "1.0.0",
+      "target": "1.0.0",
+      "minVersion": "1.0.0"
+    }
+  },
+  "targets": {
+    "466x466-active-2": {
+      "module": {
+        "watchface": {
+          "path": "watchface/index",
+          "main": 1,
+          "editable": 0,
+          "lockscreen": 0,
+          "hightCost": 0
+        }
+      },
+      "platforms": [
+        {
+          "name": "Milan",
+          "deviceSource": 8913152,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanWNFC",
+          "deviceSource": 8913153,
+          "chip": "ZPS"
+        },
+        {
+          "name": "Milan64",
+          "deviceSource": 10092800,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanWNFC64",
+          "deviceSource": 10092801,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanW",
+          "deviceSource": 8913155,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanWNA",
+          "deviceSource": 8913159,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanW64",
+          "deviceSource": 10092803,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanWNA64",
+          "deviceSource": 10092807,
+          "chip": "ZPS"
+        },
+        {
+          "name": "MilanWGolf",
+          "deviceSource": 10617091,
+          "chip": "ZPS"
+        }
+      ],
+      "designWidth": 466
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "Yellow Analog"
+    }
+  },
+  "defaultLanguage": "en-US"
+}
