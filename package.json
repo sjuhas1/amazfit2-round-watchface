@@ -1,15 +1,15 @@
 {
   "name": "dual-rings-analog-watchface",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dual Rings Analog watch face for Amazfit Active 2 Round (Zepp OS)",
   "scripts": {
     "assets": "node tools/gen-assets.cjs",
     "build": "node tools/gen-assets.cjs && zeus build",
     "preview": "node tools/gen-assets.cjs && zeus preview"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sandor Juhasz",
+  "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
     "@zeppos/device-types": "^4.0.0",

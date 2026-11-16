@@ -101,3 +101,9 @@ The face reloads in the simulator whenever you save a file. Run `npm run assets`
 - `ONAL_AOD` and `hightCost` look like typos, but they are the actual identifiers in the Zepp OS API and must stay as they are.
 - The rings are full-circle `ARC_PROGRESS` widgets, and only their `LEVEL` property is updated. Updating them with a partial `prop.MORE` made them vanish on the real watch, even though the simulator showed them fine.
 - Sensor listeners are attached only while the face is on screen (`WIDGET_DELEGATE` resume/pause) to save battery.
+
+## License
+
+[MIT](LICENSE) © 2026 Sandor Juhasz.
+
+The digits and numerals in `assets/` are rendered from the [Lato](https://www.latofonts.com/) font, which is licensed under the SIL Open Font License 1.1. The OFL allows images rendered with the font to be used under any license. The Zepp OS tooling (`@zeppos/zeus-cli`, `@zeppos/device-types`) is ISC-licensed and is only a development dependency, so none of it ships in the watch face.
