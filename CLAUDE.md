@@ -31,6 +31,6 @@ There are no tests or linter. Verify a change by running `npm run assets` and th
 
 ## Repo conventions
 
-- Remote: `git@github.com:sjuhas1/amazfit2-round-watchface.git`, branch `main`, MIT licensed.
+- Remote: `origin` is GitLab (`git@gitlab.com:sjuhas1/amazfit2-round-watchface.git`, private). It push-mirrors to the public GitHub repo, which is read-only: never push to the `github` remote, because its push URL is deliberately disabled. Branch `main`, MIT licensed.
 - Gitignored: `dist/`, `store/`, `.tools/`, `node_modules/`, `*.jpg` (reference photos of the real watch in the repo root, useful for comparing against `preview.png`).
 - Keep README.md in sync when features, layout or colours change.
