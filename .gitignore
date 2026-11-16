@@ -1,7 +1,30 @@
+# dependencies / local tooling
 node_modules/
 .tools/
+
+# build output (zeus build / preview)
 dist/
 .temp/
-*.jpg
+*.zab
 preview-qr.txt
+
+# generated store listing image (npm run assets)
+store/
+
+# reference photos
+*.jpg
+
+# logs
+npm-debug.log*
+*.log
+
+# editors / OS
+.vscode/
+.idea/
+*.swp
 .DS_Store
+Thumbs.db
+
+# secrets
+.env
+.env.*

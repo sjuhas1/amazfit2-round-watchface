@@ -280,6 +280,9 @@ async function renderPreview() {
   const face = await sharp(P('bg.png')).composite(layers).png().toBuffer()
   const masked = await sharp(face).composite([{ input: round, blend: 'dest-in' }]).png().toBuffer()
   await sharp(masked).toFile(path.join(ROOT, 'preview.png'))
+  // Zepp store listing image: 360x360 PNG, normal (non-AOD) mode, max 1 MB
+  fs.mkdirSync(path.join(ROOT, 'store'), { recursive: true })
+  await sharp(masked).resize(360, 360).png({ compressionLevel: 9 }).toFile(path.join(ROOT, 'store', 'preview-360.png'))
   await sharp(masked).resize(L.previewSize, L.previewSize).toFile(P('preview.png'))
   await sharp(masked).resize(124, 124).toFile(P('icon.png'))
 }
