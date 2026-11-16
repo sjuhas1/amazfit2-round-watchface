@@ -12,7 +12,7 @@ const C = W / 2
 // ---- Design tokens ---------------------------------------------------------
 const COL = {
   bg: '#000000',
-  hand: '#FFC800', // yellow hour/minute hands
+  hand: '#A6FF00', // bright lime hour/minute hands
   second: '#FF2B2B', // red second hand
   battery: '#2E8BFF', // blue battery arc (live arc colour is set in index.js)
   batteryTrack: '#0D2340',
@@ -161,7 +161,7 @@ function dial({ aod }) {
 }
 
 // ---- Hands (drawn pointing to 12, rotation centre given in layout) ---------
-// Hand: yellow outline, solid from the tail up to L.hands.fill of its length, hollow beyond.
+// Hand: outline, solid from the tail up to L.hands.fill of its length, hollow beyond.
 const HAND_STROKE = 3.5
 function hollowHand({ w, cy, width, tail, tip, color }) {
   const x = w / 2
@@ -177,9 +177,9 @@ function hollowHand({ w, cy, width, tail, tip, color }) {
 
 async function hands(prefix, aod) {
   const H = L.hands
-  const yellow = aod ? '#B38C00' : COL.hand
-  await save(`${prefix}hour.png`, H.hour.w, H.hour.h, hollowHand({ ...H.hour, cy: H.hour.posY, color: yellow }))
-  await save(`${prefix}minute.png`, H.minute.w, H.minute.h, hollowHand({ ...H.minute, cy: H.minute.posY, color: yellow }))
+  const handColor = aod ? '#4D7A00' : COL.hand
+  await save(`${prefix}hour.png`, H.hour.w, H.hour.h, hollowHand({ ...H.hour, cy: H.hour.posY, color: handColor }))
+  await save(`${prefix}minute.png`, H.minute.w, H.minute.h, hollowHand({ ...H.minute, cy: H.minute.posY, color: handColor }))
   if (!aod) {
     const s = H.second
     const x = s.w / 2

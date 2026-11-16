@@ -1,8 +1,8 @@
 {
   "configVersion": "v2",
   "app": {
-    "appId": 1436230,
-    "appName": "Yellow Analog",
+    "appId": 1136672,
+    "appName": "Dual Rings Analog",
     "appType": "watchface",
     "version": {
       "code": 1,
@@ -10,7 +10,7 @@
     },
     "icon": "icon.png",
     "vender": "sjuhas1",
-    "description": "Analog face: yellow hands, red seconds, blue battery arc, date, steps, heart rate, weather"
+    "description": "Analog face: lime hands, red seconds, battery ring, two-lap steps ring, date, heart rate, weather"
   },
   "permissions": [],
   "runtime": {
@@ -83,7 +83,7 @@
   },
   "i18n": {
     "en-US": {
-      "appName": "Yellow Analog"
+      "appName": "Dual Rings Analog"
     }
   },
   "defaultLanguage": "en-US"
