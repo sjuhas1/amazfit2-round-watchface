@@ -84,6 +84,12 @@
   "i18n": {
     "en-US": {
       "appName": "Dual Rings Analog"
+    },
+    "zh-CN": {
+      "appName": "双环指针"
+    },
+    "zh-TW": {
+      "appName": "雙環指針"
     }
   },
   "defaultLanguage": "en-US"

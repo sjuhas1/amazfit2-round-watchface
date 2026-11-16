@@ -25,6 +25,8 @@ There are no tests or linter. Verify a change by running `npm run assets` and th
 - Rings are full-circle `ARC_PROGRESS` widgets updated only via `prop.LEVEL`. Updating them with a partial `prop.MORE` made the rings vanish on the real watch, though the simulator looked fine.
 - Sensor listeners are attached in `WIDGET_DELEGATE.resume_call` and removed in `pause_call`. Keep this pattern for any new sensor.
 - `app.json` `appId` 1136672 is registered to the owner's Zepp developer account. Don't change it.
+- The version lives in two places: `app.json` (`version.code`, an integer that must increase with every store upload, and `version.name`) and `package.json` `version`. Bump them together.
+- Zepp store rules require `i18n` entries for `en-US`, `zh-CN` and `zh-TW`. Keep all three when renaming the face.
 - The weather `IMG_LEVEL` expects exactly 29 icons (`weather/0..28.png`), indexed by Zepp's weather code.
 
 ## Repo conventions
